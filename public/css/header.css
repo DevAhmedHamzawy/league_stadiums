@@ -1,0 +1,310 @@
+/*start header*/
+header {
+    position: fixed;
+    z-index: 999;
+    background: #fff;
+    top: 0;
+    width: 100%;
+    right: 0;
+    box-shadow: 0 0 8px #888;
+    padding: 20px 0 10px
+}
+
+.logo {
+    margin-bottom: 10px;
+    display: inline-block
+}
+
+nav {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.menu-item-has-child {
+    position: relative;
+}
+
+.sub-menu {
+    visibility: hidden;
+    /* hides sub-menu */
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    width: 250px;
+    transform: translateY(-2em);
+    -webkit-transform: translateY(-2em);
+    z-index: -1;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+}
+
+.sub-menu::-webkit-scrollbar-track {
+    background-color: #eee;
+
+}
+
+.sub-menu::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+
+}
+
+.sub-menu::-webkit-scrollbar-thumb {
+    background-color: #669934;
+}
+
+.menu-item-has-child:focus .sub-menu,
+.menu-item-has-child:focus-within .sub-menu,
+.menu-item-has-child:hover .sub-menu {
+    visibility: visible;
+    /* shows sub-menu */
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transition-delay: 0s, 0s, 0.3s;
+    /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+
+
+nav > ul > li > a {
+    padding: 3px 12px;
+    color: #353535;
+    display: block;
+    position: relative;
+    font-size: 16px;
+}
+
+nav > ul > li > a:before {
+    height: 13px;
+    width: 1px;
+    background: #8c8c8c;
+    top: 9px;
+    position: absolute;
+    content: ""
+}
+
+nav > ul > li:last-of-type > a:before {
+    content: none;
+}
+
+nav > ul > li.menu-item-has-child > a:after {
+    content: "\f107";
+    font-family: fontAwesome;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-top: 4px;
+    position: absolute;
+}
+
+nav > ul > li > a:hover,
+nav > ul > li.active > a {
+    background: #99cc33;
+    border-radius: 30px;
+}
+
+nav > ul > li > a:hover:after,
+nav > ul > li.active > a::after {
+    content: none
+}
+
+nav a:hover,
+nav > ul > li.active > a {
+    color: #fff;
+}
+
+nav ul,
+nav ul li {
+    list-style-type: none;
+
+}
+
+nav > ul {
+    text-align: center;
+}
+
+nav > ul > li {
+    display: inline-block;
+}
+
+.sub-menu {
+    background: #fff;
+    margin-top: 20px;
+}
+
+.sub-menu a {
+    display: block;
+    padding: 10px;
+    color: #000;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.sub-menu li:last-of-type a {
+    border-bottom: none;
+}
+
+.sub-menu a:hover {
+    background: #99cc33
+}
+
+.sub-menu img {
+    max-width: 40px;
+}
+
+.login-grid {
+    margin-bottom: 10px;
+}
+
+.login-grid .custom_btn {
+    vertical-align: middle
+}
+
+.lang-link {
+    font-size: 16px;
+    color: #353535;
+    text-transform: capitalize;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 5px 8px;
+}
+
+.lang-link:hover {
+    color: #fff;
+    background: #669934;
+    border-color: #669934
+}
+
+
+.responsive-div {
+    display: none;
+}
+
+.res-logo {
+    display: block;
+    padding-bottom: 20px;
+}
+
+.search-form .form-control {
+    height: 40px;
+    background: transparent;
+    border: 1px solid #fff;
+    color: #000;
+    border-radius: 0
+}
+
+
+.search-form .form-control:focus {
+    background: transparent;
+    border-color: #f6f6f6
+}
+
+.search-form .form-control::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #fff;
+}
+
+.search-form .form-control::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff;
+}
+
+.search-form .form-control:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #fff;
+}
+
+.search-form .form-control:-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff;
+}
+
+.form-btn {
+    position: absolute;
+    top: 1px;
+    height: 38px;
+    width: 40px;
+    background: #eee;
+    border: none;
+    color: #669934
+}
+
+.nav-icon {
+    font-size: 30px;
+    cursor: pointer;
+    width: 40px;
+    height: 33px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    vertical-align: text-top;
+    display: none;
+    position: absolute;
+    top: 0;
+    background: #99cc33;
+    padding: 5px;
+}
+
+
+.nav-icon span {
+    display: block;
+    margin-bottom: 5px;
+    height: 4px;
+    width: 100%;
+    background: #fff
+}
+
+.active-bar {
+    background: #000
+}
+
+.active-bar span:nth-of-type(2) {
+    display: none
+}
+
+.active-bar span {
+    height: 2px;
+    position: absolute;
+    margin-top: 16px;
+    top: 0;
+}
+
+.active-bar span:first-of-type {
+    transform: rotate(50deg);
+    -webkit-transform: rotate(50deg);
+    width: 30px;
+}
+
+.active-bar span:nth-of-type(3) {
+    transform: rotate(130deg);
+    -webkit-transform: rotate(130deg);
+    width: 30px;
+}
+
+
+.pages-header {
+    min-height: 220px;
+    background: url(../images/main/pages_header.png);
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.pages-header h1 {
+    color: #fff;
+    font-size: 30px;
+    font-family: "med";
+    margin-bottom: 20px;
+}
+
+.pages-header p {
+    max-height: 80px;
+    overflow: hidden;
+}
+
+/*end header*/
