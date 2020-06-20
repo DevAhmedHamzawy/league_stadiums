@@ -29,7 +29,7 @@ class UserFormRequest extends FormRequest
             'last_name' => 'required|unique:users|string|max:255',
             'age' => 'required|numeric|max:255',
             'birthdate' => 'required',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required|numeric|unique',
             'email' => 'required|string|email|max:255|unique:users',
             'city' => 'required|string|max:255',
             'role' => 'required',

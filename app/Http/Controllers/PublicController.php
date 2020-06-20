@@ -78,7 +78,7 @@ class PublicController extends Controller
 
     
 
-    /*--------- Refree ------------*/
+    /*--------- Player As A Refree ------------*/
     public function allMatches()
     {
         return view('matches.index');
@@ -88,10 +88,10 @@ class PublicController extends Controller
         $match_id = $id;
         return view('matches.matchstatistics' , compact('match_id'));
     }
-    /*--------- Refree ------------*/
+    /*--------- Player As A Refree ------------*/
 
 
-    /*--------- Team Owner ------------*/
+    /*--------- Player As A Team Owner ------------*/
 
     public function team($id){
         return view('team', compact('id'));
@@ -100,7 +100,7 @@ class PublicController extends Controller
     public function players(){
         return view('players');
     }
-    /*--------- Team Owner ------------*/
+    /*--------- Player As A Team Owner ------------*/
 
 
     /*--------- Auth User Data Handling ------------*/

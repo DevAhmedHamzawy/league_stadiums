@@ -10,6 +10,7 @@ use File;
 use App\Http\Resources\LeagueResource;
 use App\Group;
 use App\Type;
+use App\Stadium;
 
 class LeaguesController extends Controller
 {
@@ -67,7 +68,14 @@ class LeaguesController extends Controller
 
         $request->input('league_id') == null ? $league_id = 0 : $league_id = $request->input('league_id');
         $request['image'] = $name;
-        $league = League::updateOrCreate(['id' => $league_id] ,$request->except('league_id','photo'));
+
+        // Check If User_id Is Null (This Only Happens In Admin Panel)
+        if($request->get('user_id') == null){
+            $stadium = Stadium::findOrFail($request->get('stadium_id'));
+            $request->merge(['user_id' => $stadium->user_id]);
+        }
+
+        $league = League::updateOrCreate(['id' => $league_id] ,$request->except('league_id','photo','league_add'));
         return $league ? response()->json(["status" => true, "data" => new LeagueResource($league)]) : response()->json(["status" => false]); 
     }
   

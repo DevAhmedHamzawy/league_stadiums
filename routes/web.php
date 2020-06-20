@@ -1,15 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 /*---------- Visitors ----------*/
 Route::get('/', 'PublicController@index')->name('index');
@@ -58,23 +49,23 @@ Route::group(['middleware' => 'verified'], function (){
 
     });
 
-    // Role : Refree , Objectives : Create Match Statistics ('Insert Results Of A Specific Match') 
-    Route::group(['middleware' => ['role:refree']], function() {
+    
+    // Role : Player , Objectives : Join Teams 
+    // Role : (Player As A Refree) , Objectives : Create Match Statistics ('Insert Results Of A Specific Match') 
+    // Role : (Player As A Team Owner) , Objectives : Join Leagues , Send Invitations To Players 
+    Route::group(['middleware' => ['role:player']], function() {
+
+        // Join A Team
+        Route::get('join/{ref}', 'UsersController@join');
+
+        // If A Refree , Show Matches
         Route::get('matches', 'PublicController@allMatches');
         Route::get('matches/{id?}/add-matchstatistics', 'PublicController@addMatchStatistics');
-    });
 
-
-    // Role : Team Owner , Objectives : Join Leagues , Send Invitations To Players 
-    Route::group(['middleware' => ['role:team_owner']], function() {
+        // If A Team Owner , Show Team Or Show Players To Invite For Joining His Team
         Route::get('players', 'PublicController@players');
         Route::get('team/{id?}', 'PublicController@team');
-    });
-
-
-    // Role : Player , Objectives : Join Teams 
-    Route::group(['middleware' => ['role:player']], function() {
-        Route::get('join/{ref}', 'UsersController@join');
+        
     });
 
    
@@ -91,10 +82,16 @@ Route::group(['prefix' => '/admin','middleware' => 'assign.guard:admin,admin/log
 
 // Dashboard
 Route::get('dashboard', 'AdminController@dashboard');
+Route::get('leagues', 'AdminController@leagues');
+Route::get('stadiums', 'AdminController@stadiums');
 Route::get('users', 'AdminController@users');
+Route::get('teamowners', 'AdminController@teamowners');
+Route::get('players', 'AdminController@players');
+Route::get('refrees', 'AdminController@refrees');
 Route::get('admins', 'AdminController@admins');
 Route::get('articles', 'AdminController@articles');
 Route::get('tags', 'AdminController@tags');
+Route::get('widgets', 'AdminController@widgets');
 Route::get('settings', 'AdminController@settings');
 
 });

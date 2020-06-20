@@ -35,13 +35,12 @@
 </div>
 
     
-    <table class="table">
+    <table class="table table-striped table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">الإسم باللغة العربية</th>
-      <th scope="col">الإسم باللغة الإنجليزية</th>
-      <th scope="col">العمليات</th>
+      <th scope="col">الإسم</th>
+      <th scope="col">الترتيب</th>
     </tr>
   </thead>
   <tbody>
@@ -51,11 +50,8 @@
     
       <tr v-for="tag in tags" v-bind:key="tag.id">
         <th scope="row">{{ tag.id }}</th>
-        <td>{{ tag.name_ar }}</td>
-        <td>{{ tag.name_en }}</td>
-        <td> <button @click="editTag(tag)" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-        <button @click="deleteTag(tag.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-        </td>
+        <td>{{ tag.name["ar"] }}</td>
+        <td>{{ tag.order_column }}</td>
       </tr>
      
   </tbody>

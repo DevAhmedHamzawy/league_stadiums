@@ -26,7 +26,7 @@ class StadiumsController extends Controller
     public function store(Request $request)
     {
         $request->input('stadium_id') == null ? $stadium_id = 0 : $stadium_id = $request->input('stadium_id');
-        $stadium = Stadium::updateOrCreate(['id' => $stadium_id] ,$request->except('stadium_id')); //? response()->json(["status" => true, "data" => new StadiumResource($stadium)]) : response()->json(["status" => false]); 
+        $stadium = Stadium::updateOrCreate(['id' => $stadium_id] ,$request->except('stadium_id','stadium_add')); //? response()->json(["status" => true, "data" => new StadiumResource($stadium)]) : response()->json(["status" => false]); 
         return response()->json(["status" => true, "data" => new StadiumResource($stadium)]);
     }
 

@@ -17,6 +17,8 @@ class CreateLeaguesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('stadium_id')->unsigned();
+            $table->integer('refree_id')->unsigned();
+            $table->integer('commentator_id')->unsigned();
             $table->string('name', 191);
             $table->integer('teams_no');
             $table->enum('regulation', array('groups', 'types'));
@@ -41,6 +43,18 @@ class CreateLeaguesTable extends Migration
 						->onDelete('cascade')
 						->onUpdate('restrict');
         });
+
+        Schema::table('leagues', function(Blueprint $table) {
+			$table->foreign('refree_id')->references('id')->on('users')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+        });
+        
+        Schema::table('leagues', function(Blueprint $table) {
+			$table->foreign('commentator_id')->references('id')->on('users')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
         
         Schema::table('leagues', function(Blueprint $table) {
 			$table->foreign('type_id')->references('id')->on('types')
@@ -57,9 +71,21 @@ class CreateLeaguesTable extends Migration
     public function down()
     {
         Schema::table('leagues', function(Blueprint $table) {
+			$table->dropForeign('leagues_user_id_foreign');
+        });
+
+        Schema::table('leagues', function(Blueprint $table) {
 			$table->dropForeign('leagues_stadium_id_foreign');
         });
         
+        Schema::table('leagues', function(Blueprint $table) {
+			$table->dropForeign('leagues_refree_id_foreign');
+        });
+
+        Schema::table('leagues', function(Blueprint $table) {
+			$table->dropForeign('leagues_commentator_id_foreign');
+        });
+
         Schema::table('leagues', function(Blueprint $table) {
 			$table->dropForeign('leagues_type_id_foreign');
 		});

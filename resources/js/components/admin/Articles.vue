@@ -6,7 +6,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addArticleLabel">إضافة حالة جديدة</h5>
+        <h5 class="modal-title" id="addArticleLabel">إضافة مقال جديد</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -63,12 +63,12 @@
 </div>
 
     
-    <table class="table">
+    <table class="table table-striped table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">الإسم باللغة العربية</th>
-      <th scope="col">الإسم باللغة الإنجليزية</th>
+      <th scope="col">الإسم</th>
+      <th scope="col">الوصف</th>
       <th scope="col">العمليات</th>
     </tr>
   </thead>
@@ -79,9 +79,9 @@
     
       <tr v-for="article in articles" v-bind:key="article.id">
         <th scope="row">{{ article.id }}</th>
-        <td>{{ article.name_ar }}</td>
-        <td>{{ article.name_en }}</td>
-        <td> <button @click="editArticle(article)" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+        <td>{{ article.title }}</td>
+        <td>{{ article.description }}</td>
+        <td> <button @click="editArticle(article)" data-toggle="modal" data-target="#addArticle" class="btn btn-warning"><i class="fas fa-edit"></i></button>
         <button @click="deleteArticle(article.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
@@ -159,13 +159,13 @@ export default {
       this.pagination = pagination;
     },
     deleteArticle(id) {
-      if (confirm('Are You Sure?')) {
+      if (confirm('هل أنت متأكد من الحذف ؟')) {
         fetch(`../public/api/deletearticle/${id}`, {
           method: 'post',
         })
           .then(res => res.json())
           .then(data => {
-            alert('Article Removed');
+            alert('تم حذف المقال');
             this.fetchArticles();
           })
           .catch(err => console.log(err));
@@ -185,13 +185,15 @@ export default {
           .then(res => res.json())
           .then(data => {
             this.clearForm();
-            alert('Article Added');
+            alert('تم إضافة المقال');
+            $('#addArticle').modal('hide');
+            $('.modal-backdrop').remove();
             this.fetchArticles();
           })
           .catch(err => console.log(err));}}
        else {
         // Update
-        fetch('../public/api/updatearticle', {
+        fetch('../public/api/addarticle', {
           method: 'post',
           body: JSON.stringify(this.article),
           headers: {
@@ -201,7 +203,9 @@ export default {
           .then(res => res.json())
           .then(data => {
             this.clearForm();
-            alert('Article Updated');
+            alert('تم تحديث المقال');
+            $('#addArticle').modal('hide');
+            $('.modal-backdrop').remove();
             this.fetchArticles();
           })
           .catch(err => console.log(err));

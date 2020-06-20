@@ -1,24 +1,41 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
+ <!--start pages-header
+             ================-->
+             <section class="pages-header  text-center wow fadeIn">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 pages-title">
+                            <h1 class="wow fadeInUp">تـــــأكـــــيــــــد الـــبــــريـــــد الإلـــكــــــتــــــرونـــــــــى</h1>
                         </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </section>
+            <!--end pages-header-->
+        
+        
+        
+            <!--start login-pg
+                     ================-->
+            <section class="login-pg marg-sec">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 wow fadeIn text-center">
+                            @if (session('resent'))
+                                <div class="alert alert-success" role="alert">
+                                    تم إرسال كود التأكيد مرة أخرى للبريد الإلكترونى الخاص بك ..... الرجاء تفقد البريد الإلكترونى
+                                </div>
+                            @endif
+    
+                            <h1>من فضلك قم بتأكيد البريد الإلكترونى عبر كود التأكيد الذى تم إرساله إليك</h1>
+                            <br/><br/>
+                            <h2>إذا لم تستلم كود التأكيد, <a href="{{ route('verification.resend') }}">إضغط هنا لطلب كود اخر</a>.</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--end login-pg  -->
+
 @endsection

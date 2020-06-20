@@ -84,11 +84,17 @@ Vue.component('team', require('./components/team.vue').default);
 
 
 // Admin Panel
-Vue.component('users', require('./components/admin/users.vue').default);
-Vue.component('admins', require('./components/admin/admins.vue').default);
+Vue.component('adminleagues', require('./components/admin/leagues.vue').default);
+Vue.component('adminstadiums', require('./components/admin/stadiums.vue').default);
+Vue.component('users', require('./components/admin/users/users.vue').default);
+Vue.component('teamowners', require('./components/admin/users/teamowners.vue').default);
+Vue.component('players', require('./components/admin/users/players.vue').default);
+Vue.component('refrees', require('./components/admin/users/refrees.vue').default);
+Vue.component('admins', require('./components/admin/admins/admins.vue').default);
 Vue.component('articles', require('./components/admin/articles.vue').default);
 Vue.component('tags', require('./components/admin/tags.vue').default);
 Vue.component('settings', require('./components/admin/settings.vue').default);
+Vue.component('widgets', require('./components/admin/widgets.vue').default);
 
 
 

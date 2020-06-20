@@ -59,7 +59,28 @@
                                 <option v-for="stadium in stadiums" :key="stadium.id" :value="stadium.id" >{{ stadium.name }}</option>
                            </select>
                             <div class="invalid-feedback">
-                                من فضلك أدخل الوصف للدورى 
+                                من فضلك أدخل الإستاد  
+                            </div>
+                        </div>
+
+                        <div class="form-group  col-12">
+                           <select class="form-control" name="refree_id" v-model="league.refree_id">
+                                <option selected>...اختر الحكم</option>
+                                <option v-for="user in users" :key="user.id" :value="user.id" >{{ user.user_name }}</option>
+                           </select>
+                            <div class="invalid-feedback">
+                                من فضلك أدخل الحكم  
+                            </div>
+                        </div>
+
+
+                        <div class="form-group  col-12">
+                           <select class="form-control" name="refree_id" v-model="league.commentator_id">
+                                <option selected>...اختر المعلق</option>
+                                <option v-for="user in users" :key="user.id" :value="user.id" >{{ user.user_name }}</option>
+                           </select>
+                            <div class="invalid-feedback">
+                                من فضلك أدخل المعلق  
                             </div>
                         </div>
 
@@ -130,8 +151,6 @@ export default  {
       }
   },
   mounted(){
-     
-
             axios.get('../api/fetch_owner_stadiums/'+this.user.id , { headers: this.headers })
            .then(response => {
             this.stadiums = response.data.data;
@@ -140,9 +159,18 @@ export default  {
             .catch(error =>{
                 this.errors.push(error);
                 console.log(error);
-            })     
-           
-       
+            });        
+
+            axios.get('../api/users/' , { headers: this.headers })
+           .then(response => {
+            this.users = response.data.data;
+            console.log(response.data.data);
+            })
+            .catch(error =>{
+                this.errors.push(error);
+                console.log(error);
+            });        
+            
   },
   methods: {
         onSubmit() {

@@ -66,10 +66,10 @@
                             <div class="form-group  col-12">
                                 <select class="form-control" name="role" v-model="user.role">
                                         <option selected disabled>هادخل الموقع بصفتى ....</option>
-                                        <option value="1">صاحب فريق</option>
-                                        <option value="2">صاحب ملعب</option>
-                                        <option value="3">لاعب</option>
-                                        <option value="4">حكم</option>
+                                        <option value="1">صاحب ملعب</option>
+                                        <option value="2">لاعب</option>
+                                        <option value="3">معلق</option>
+
                                 </select>
                                 <div class="invalid-feedback">
                                     ده مهم جداً علشان نختار لك الخطوات الجاية فالموقع 

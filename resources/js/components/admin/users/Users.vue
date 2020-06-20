@@ -2,11 +2,11 @@
   <div>
    
 <!-- Modal -->
-<div class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="addAdminLabel" aria-hidden="true">
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addAdminLabel">إضافة أدمن جديد</h5>
+        <h5 class="modal-title" id="addUserLabel">إضافة مستخدم جديد</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,53 +18,50 @@
       <li v-for="error in verrors" :key="error">{{ error }}</li>
     </ul>
     </p>
-    <form @submit.prevent="addAdmin" class="mb-3">
+    <form @submit.prevent="addUser" class="mb-3">
       <div class="form-group">
-        <input type="text" name="user_name" v-validate="'required'" class="form-control" placeholder="إسم المستخدم" v-model="admin.user_name">
+        <input type="text" name="user_name" v-validate="'required'" class="form-control" placeholder="إسم المستخدم" v-model="user.user_name">
         <span>{{ errors.first('user_name') }}</span>
       </div>
       <div class="form-group">
-        <input type="text" name="first_name" v-validate="'required'" class="form-control" placeholder="الإسم الأول" v-model="admin.first_name">
+        <input type="text" name="first_name" v-validate="'required'" class="form-control" placeholder="الإسم الأول" v-model="user.first_name">
         <span>{{ errors.first('first_name') }}</span>
       </div>
       <div class="form-group">
-        <input type="text" name="last_name" v-validate="'required'" class="form-control" placeholder="الإسم الأخير" v-model="admin.last_name">
+        <input type="text" name="last_name" v-validate="'required'" class="form-control" placeholder="الإسم الأخير" v-model="user.last_name">
         <span>{{ errors.first('last_name') }}</span>
       </div>
       <div class="form-group">
-        <input type="text" name="age" v-validate="'required'" class="form-control" placeholder="السن" v-model="admin.age">
+        <input type="text" name="age" v-validate="'required'" class="form-control" placeholder="السن" v-model="user.age">
         <span>{{ errors.first('age') }}</span>
       </div>
       <div class="form-group">
-        <input type="date" name="birthdate" v-validate="'required'" class="form-control" placeholder="تاريخ الميلاد" v-model="admin.birthdate">
+        <input type="date" name="birthdate" v-validate="'required'" class="form-control" placeholder="تاريخ الميلاد" v-model="user.birthdate">
         <span>{{ errors.first('birthdate') }}</span>
       </div>
       <div class="form-group">
-        <input type="text" name="mobile" v-validate="'required'" class="form-control" placeholder="رقم الموبايل" v-model="admin.mobile">
+        <input type="text" name="mobile" v-validate="'required'" class="form-control" placeholder="رقم الموبايل" v-model="user.mobile">
         <span>{{ errors.first('mobile') }}</span>
       </div>
       <div class="form-group">
-        <input type="email" name="email" v-validate="'required'" class="form-control" placeholder="البريد الإلكترونى" v-model="admin.email">
+        <input type="email" name="email" v-validate="'required'" class="form-control" placeholder="البريد الإلكترونى" v-model="user.email">
         <span>{{ errors.first('email') }}</span>
       </div>
       <div class="form-group">
-        <input type="text" name="city" v-validate="'required'" class="form-control" placeholder="المدينة" v-model="admin.city">
+        <input type="text" name="city" v-validate="'required'" class="form-control" placeholder="المدينة" v-model="user.city">
         <span>{{ errors.first('city') }}</span>
       </div>
       <div class="form-group">
-        <select class="form-control" name="role" v-validate="'required'" v-model="admin.role">
+        <select class="form-control" name="role" v-validate="'required'" v-model="user.role">
             <option selected disabled>... الدور</option>
-            <option value="5">أدمن رئيسى</option>
-            <option value="6">مسئول عن الملاعب</option>
-            <option value="7">مسئول عن الفرق</option>
-            <option value="8">مسئول عن الدوريات</option>
-            <option value="9">مستقبل الشكاوى والإقتراحات</option>
-            <option value="10">محرر</option>
+            <option value="1">صاحب ملعب</option>
+            <option value="2">لاعب</option>
+            <option value="3">معلق</option>
         </select>
         <span>{{ errors.first('role') }}</span>
       </div>
       <div class="form-group">
-        <input type="password" name="password" v-validate="'required'" class="form-control" placeholder="كلمة المرور" v-model="admin.password">
+        <input type="password" name="password" v-validate="'required'" class="form-control" placeholder="كلمة المرور" v-model="user.password">
         <span>{{ errors.first('password') }}</span>
       </div>
       <div class="form-group">
@@ -72,7 +69,7 @@
           <div class="file-select">
             <i class="fa fa-file-image-o main-form-icon"></i>
             <div class="file-select-button" id="fileName"><i class="fa fa-upload main-form-icon"></i></div>
-            <div class="file-select-name" id="noFile">الصوره  الشخصية</div>
+            <div class="file-select-name" id="noFile">صورة المستخدم</div>
             <input type="file" ref="image" name="chooseFile" class="form-control" id="chooseFile" @change="onImageChange" required>
           </div>
         </div>
@@ -94,7 +91,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">الإسم باللغة العربية</th>
-      <th scope="col">الإسم باللغة الإنجليزية</th>
+      <th scope="col">البريد اللإلكترونى</th>
       <th scope="col">العمليات</th>
     </tr>
   </thead>
@@ -103,12 +100,12 @@
 
       
     
-      <tr v-for="admin in admins" v-bind:key="admin.id">
-        <th scope="row">{{ admin.id }}</th>
-        <td>{{ admin.user_name }}</td>
-        <td>{{ admin.role }}</td>
-        <td> <button @click="editAdmin(admin)" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-        <button @click="deleteAdmin(admin.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+      <tr v-for="user in users" v-bind:key="user.id">
+        <th scope="row">{{ user.id }}</th>
+        <td>{{ user.user_name }}</td>
+        <td>{{ user.email }}</td>
+        <td> <button @click="editUser(user)" data-toggle="modal" data-target="#addUser" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+        <button @click="deleteUser(user.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
         </td>
       </tr>
      
@@ -118,11 +115,11 @@
 
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchAdmins(pagination.prev_page_url)">السابق</a></li>
+        <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchUsers(pagination.prev_page_url)">السابق</a></li>
 
         <li class="page-item disabled"><a class="page-link text-dark" href="#">الصفحة {{ pagination.current_page }} من أصل {{ pagination.last_page }}</a></li>
     
-        <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchAdmins(pagination.next_page_url)">التالى</a></li>
+        <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item"><a class="page-link" href="#" @click="fetchUsers(pagination.next_page_url)">التالى</a></li>
       </ul>
     </nav>
     
@@ -135,8 +132,8 @@ export default {
   data() {
     return {
       verrors: [],
-      admins: [],
-      admin: {
+      users: [],
+      user: {
         id: '',
         user_name: '',
         first_name: '',
@@ -148,24 +145,24 @@ export default {
         city: '',
         password: '',
         avatar: '',
-        //user_add: this.auth_user_id
+        user_add: this.auth_user_id
       },
-      admin_id: '',
+      user_id: '',
       pagination: {},
       edit: false
     };
   },
   created() {
-    this.fetchAdmins();
+    this.fetchUsers();
   },
   methods: {
-    fetchAdmins(page_url) {
+    fetchUsers(page_url) {
       let vm = this;
-      page_url = page_url || '../public/api/getadmins';
+      page_url = page_url || '../public/api/getusers';
       fetch(page_url)
         .then(res => res.json())
         .then(res => {
-          this.admins = res.data;
+          this.users = res.data;
           vm.makePagination(res.meta, res.links);
         })
         .catch(err => console.log(err));
@@ -179,26 +176,26 @@ export default {
       };
       this.pagination = pagination;
     },
-    deleteAdmin(id) {
+    deleteUser(id) {
       if (confirm('Are You Sure?')) {
-        fetch(`../public/api/deleteadmin/${id}`, {
+        fetch(`../public/api/deleteuser/${id}`, {
           method: 'post',
         })
           .then(res => res.json())
           .then(data => {
-            alert('Admin Removed');
-            this.fetchAdmins();
+            alert('User Removed');
+            this.fetchUsers();
           })
           .catch(err => console.log(err));
       }
     },
-    addAdmin() {
+    addUser() {
       if (this.edit === false) {
         // Add
         if(this.validation()){
-        fetch('../public/api/addadmin', {
+        fetch('../api/adduser', {
           method: 'post',
-          body: JSON.stringify(this.admin),
+          body: JSON.stringify(this.user),
           headers: {
             'content-type': 'application/json'
           }
@@ -206,15 +203,17 @@ export default {
           .then(res => res.json())
           .then(data => {
             this.clearForm();
-            alert('Admin Added');
-            this.fetchAdmins();
+            alert('User Added');
+            $('#addUser').modal('hide');
+            $('.modal-backdrop').remove();
+            this.fetchUsers();
           })
           .catch(err => console.log(err));}}
        else {
         // Update
-        fetch('../public/api/updateadmin', {
+        fetch('../api/updateuser', {
           method: 'post',
-          body: JSON.stringify(this.admin),
+          body: JSON.stringify(this.user),
           headers: {
             'content-type': 'application/json'
           }
@@ -222,50 +221,51 @@ export default {
           .then(res => res.json())
           .then(data => {
             this.clearForm();
-            alert('Admin Updated');
-            this.fetchAdmins();
+            alert('User Updated');
+            this.fetchUsers();
           })
           .catch(err => console.log(err));
       }
     },
-    editAdmin(admin) {
+    editUser(user) {
       this.edit = true;
-      this.admin.id = admin.id;
-      this.admin.admin_id = admin.id;
-      this.admin.user_name = admin.user_name;
-      this.admin.first_name = admin.first_name;
-      this.admin.last_name = admin.last_name;
-      this.admin.age = admin.age;
-      this.admin.birthdate = admin.birthdate;
-      this.admin.mobile = admin.mobile;
-      this.admin.email = admin.email;
-      this.admin.city = admin.city;
-      this.admin.image = admin.image;
-      this.admin.password = admin.password;
+      this.user.id = user.id;
+      this.user.user_id = user.id;
+      this.user.user_name = user.user_name;
+      this.user.first_name = user.first_name;
+      this.user.last_name = user.last_name;
+      this.user.age = user.age;
+      this.user.birthdate = user.birthdate;
+      this.user.mobile = user.mobile;
+      this.user.email = user.email;
+      this.user.city = user.city;
+      this.user.image = user.image;
+      this.user.password = user.password;
 
     },
     clearForm() {
       this.edit = false;
-      this.admin.id = null;
-      this.admin.admin_id = null;
-      this.admin.user_name = '';
-      this.admin.first_name = '';
-      this.admin.last_name = '';
-      this.admin.age = '';
-      this.admin.birthdate = '';
-      this.admin.mobile = '';
-      this.admin.email = '';
-      this.admin.city = '';
-      this.admin.image = '';
-      this.admin.password = '';
+      this.user.id = null;
+      this.user.user_id = null;
+      this.user.user_name = '';
+      this.user.first_name = '';
+      this.user.last_name = '';
+      this.user.age = '';
+      this.user.birthdate = '';
+      this.user.mobile = '';
+      this.user.email = '';
+      this.user.city = '';
+      this.user.image = '';
+      this.user.password = '';
 
     },
     validation(){
       this.verrors = [];
-      if(this.admin.name_ar === ''){this.verrors.push('الرجاء إدخال الإسم باللغة العربية');}
-      if(this.admin.name_en === ''){this.verrors.push('الرجاء إدخال الإسم باللغة الإنجليزية');}
+      if(this.user.name_ar === ''){this.verrors.push('الرجاء إدخال الإسم باللغة العربية');}
+      if(this.user.name_en === ''){this.verrors.push('الرجاء إدخال الإسم باللغة الإنجليزية');}
       return this.verrors.length > 0 ? false : true;
     },
+
      onImageChange(e) {
             let files = e.target.files || e.dataTransfer.files;
             if (!files.length)
@@ -276,7 +276,7 @@ export default {
             let reader = new FileReader();
             let vm = this;
             reader.onload = (e) => {
-                vm.admin.photo = e.target.result;
+                vm.user.photo = e.target.result;
             };
             reader.readAsDataURL(file);
         },

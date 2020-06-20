@@ -35,4 +35,11 @@ class ArticlesController extends Controller
         return response()->json(["status" => true, "data" => new articleResource($article)]);
     }
 
+    public function destroy($id)
+    {
+        $article = Article::findOrfail($id); 
+
+        return  $article->delete() ? response()->json(["status" => true]) : response()->json(["status" => false]);
+    }
+
 }

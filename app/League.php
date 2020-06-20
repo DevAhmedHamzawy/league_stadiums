@@ -10,7 +10,7 @@ class League extends Model
 
     public function comments()
     {
-        return $this->hasMany('Comment');
+        return $this->hasMany('App\Comment');
     }
 
     public function groups()
@@ -21,7 +21,7 @@ class League extends Model
     // May Be Removed
     public function types()
     {
-        return $this->hasMany('Type');
+        return $this->hasMany('App\Type');
     }
 
     public function teams()
@@ -32,5 +32,17 @@ class League extends Model
     public function matches()
     {
         return $this->hasMany('App\Match');
+    }
+
+
+    // this is a recommended way to declare event handlers
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($league) { 
+             $league->comments()->delete();
+             $league->matches()->delete();
+
+        });
     }
 }
